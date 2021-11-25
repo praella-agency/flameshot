@@ -59,6 +59,7 @@ private:
     void initShowStartupLaunchMessage();
     void initCopyAndCloseAfterUpload();
     void initSaveAfterCopy();
+    void initCredentialHolder();
     void initCopyPathAfterSave();
     void initAntialiasingPinZoom();
     void initUseJpgForClipboard();

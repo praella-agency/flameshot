@@ -47,6 +47,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUploadWithoutConfirmation();
     initUseJpgForClipboard();
     initSaveAfterCopy();
+    initCredentialHolder();
     inituploadHistoryMax();
     initUndoLimit();
 
@@ -420,6 +421,13 @@ void GeneralConf::initSaveAfterCopy()
     vboxLayout->addLayout(extensionLayout);
 }
 
+void GeneralConf::initCredentialHolder()
+{
+    QLineEdit* m_usernameEditor = new QLineEdit(tr("Username/Email"));
+//    box->setFlat(true);
+    m_layout->addWidget(m_usernameEditor);
+}
+
 void GeneralConf::historyConfirmationToDelete(bool checked)
 {
     ConfigHandler().setHistoryConfirmationToDelete(checked);
@@ -536,9 +544,9 @@ void GeneralConf::initAntialiasingPinZoom()
 void GeneralConf::initUploadWithoutConfirmation()
 {
     m_uploadWithoutConfirmation =
-      new QCheckBox(tr("Upload to Imgur without confirmation"), this);
+      new QCheckBox(tr("Upload to Droplr without confirmation"), this);
     m_uploadWithoutConfirmation->setToolTip(
-      tr("Upload to Imgur without confirmation"));
+      tr("Upload to Droplr without confirmation"));
     m_scrollAreaLayout->addWidget(m_uploadWithoutConfirmation);
     connect(m_uploadWithoutConfirmation, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setUploadWithoutConfirmation(checked);
