@@ -49,6 +49,8 @@
         <file>img/material/black/minus.svg</file>
         <file>img/material/black/plus.svg</file>
         <file>img/material/black/shortcut.svg</file>
+        <file>img/material/black/cloud.svg</file>
+        <file>img/material/black/droplr.svg</file>
         <file>img/material/white/accept.svg</file>
         <file>img/material/white/arrow-bottom-left.svg</file>
         <file>img/material/white/centeralign.svg</file>
@@ -95,5 +97,7 @@
         <file>img/material/white/move_down.svg</file>
         <file>img/material/white/move_up.svg</file>
         <file>img/material/white/delete.svg</file>
+        <file>img/material/white/cloud.svg</file>
+        <file>img/material/white/droplr.svg</file>
     </qresource>
 </RCC>

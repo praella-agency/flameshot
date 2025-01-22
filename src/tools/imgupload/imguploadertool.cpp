@@ -2,6 +2,8 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "imguploadertool.h"
+#include "src/tools/droplr/droplruploader.h"
+#include "src/utils/confighandler.h"
 
 ImgUploaderTool::ImgUploaderTool(QObject* parent)
   : AbstractActionTool(parent)
@@ -15,7 +17,11 @@ bool ImgUploaderTool::closeOnButtonPressed() const
 QIcon ImgUploaderTool::icon(const QColor& background, bool inEditor) const
 {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "cloud-upload.svg");
+    if(ConfigHandler().cloudImgur()) {
+        return QIcon(iconPath(background) + "cloud-upload.svg");
+    } else {
+        return QIcon(iconPath(background) + "droplr.svg");
+    }
 }
 
 QString ImgUploaderTool::name() const
@@ -30,7 +36,11 @@ CaptureTool::Type ImgUploaderTool::type() const
 
 QString ImgUploaderTool::description() const
 {
-    return tr("Upload the selection");
+    if(ConfigHandler().cloudImgur()) {
+        return tr("Upload the selection");
+    } else {
+        return tr("Upload the selection to Droplr");
+    }
 }
 
 CaptureTool* ImgUploaderTool::copy(QObject* parent)

@@ -16,6 +16,8 @@ target_sources(
         imgupload/imguploadertool.cpp
         imgupload/imguploadermanager.h
         imgupload/imguploadermanager.cpp
+        droplr/droplruploader.h
+        droplr/droplruploader.cpp
 )
 target_sources(
   flameshot

@@ -132,6 +132,15 @@ public:
     void setDefaultSettings();
     QString configFilePath() const;
 
+    bool cloudImgur();
+    void setCloudImgur(const bool);
+    bool cloudDroplr();
+    void setCloudDroplr(const bool);
+    void setDroplrUsername(const QString& username);
+    QString droplrUsername();
+    void setDroplrPassword(const QString& password);
+    QString droplrPassword();
+
     // GENERIC GETTERS AND SETTERS
     bool setShortcut(const QString& actionName, const QString& shortcut);
     QString shortcut(const QString& actionName);

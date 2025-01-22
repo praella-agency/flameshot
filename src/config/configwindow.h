@@ -8,6 +8,7 @@
 class FileNameEditor;
 class ShortcutsWidget;
 class GeneralConf;
+class CloudConf;
 class QFileSystemWatcher;
 class VisualsEditor;
 class QWidget;
@@ -35,6 +36,9 @@ private:
 
     GeneralConf* m_generalConfig;
     QWidget* m_generalConfigTab;
+
+    CloudConf* m_cloudConfig;
+    QWidget* m_cloudConfigTab;
 
     VisualsEditor* m_visuals;
     QWidget* m_visualsTab;

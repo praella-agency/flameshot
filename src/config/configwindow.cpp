@@ -6,6 +6,7 @@
 #include "src/config/configresolver.h"
 #include "src/config/filenameeditor.h"
 #include "src/config/generalconf.h"
+#include "src/config/cloudconf.h"
 #include "src/config/shortcutswidget.h"
 #include "src/config/strftimechooserwidget.h"
 #include "src/config/visualseditor.h"
@@ -77,6 +78,15 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     m_tabWidget->addTab(
       m_generalConfigTab, QIcon(modifier + "config.svg"), tr("General"));
 
+    // cloud
+    m_cloudConfig = new CloudConf();
+    m_cloudConfigTab = new QWidget();
+    auto* cloudConfigLayout = new QVBoxLayout(m_cloudConfigTab);
+    m_cloudConfigTab->setLayout(cloudConfigLayout);
+    cloudConfigLayout->addWidget(m_cloudConfig);
+    m_tabWidget->addTab(
+      m_cloudConfigTab, QIcon(modifier + "cloud.svg"), tr("Cloud"));
+
     // shortcuts
     m_shortcuts = new ShortcutsWidget();
     m_shortcutsTab = new QWidget();
@@ -99,6 +109,10 @@ ConfigWindow::ConfigWindow(QWidget* parent)
             &ConfigWindow::updateChildren,
             m_generalConfig,
             &GeneralConf::updateComponents);
+    connect(this,
+            &ConfigWindow::updateChildren,
+            m_cloudConfig,
+            &CloudConf::updateComponents);
 
     // Error indicator (this must come last)
     initErrorIndicator(m_visualsTab, m_visuals);
