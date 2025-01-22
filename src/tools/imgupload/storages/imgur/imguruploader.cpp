@@ -35,7 +35,7 @@ void ImgurUploader::handleReply(QNetworkReply* reply)
         QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
         QJsonObject json = response.object();
         // QJsonObject data = json[QStringLiteral("data")].toObject();
-        setImageURL(data[QStringLiteral("link")].toString());
+        setImageURL(json[QStringLiteral("link")].toString());
 
         // auto deleteToken = data[QStringLiteral("deletehash")].toString();
 
