@@ -60,6 +60,7 @@ private:
     void initHistoryConfirmationToDelete();
     void initPredefinedColorPaletteLarge();
     void initSaveAfterCopy();
+    void initCredentialHolder();
     void initScrollArea();
     void initShowDesktopNotification();
     void initShowHelp();

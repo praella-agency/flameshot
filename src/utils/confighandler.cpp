@@ -340,7 +340,8 @@ int ConfigHandler::toolSize(CaptureTool::Type toolType)
 
 QString ConfigHandler::filenamePatternDefault()
 {
-    return QStringLiteral("%F_%H-%M");
+    // return QStringLiteral("%F_%H-%M");
+    return QStringLiteral("Screenshot-%F_%H-%M");
 }
 
 bool ConfigHandler::cloudImgur()

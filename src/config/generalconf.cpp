@@ -47,6 +47,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUploadWithoutConfirmation();
     initUseJpgForClipboard();
     initSaveAfterCopy();
+    initCredentialHolder();
     initUploadHistoryMax();
     initUndoLimit();
     initUploadClientSecret();
@@ -646,6 +647,13 @@ void GeneralConf::initAntialiasingPinZoom()
     connect(m_antialiasingPinZoom, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setAntialiasingPinZoom(checked);
     });
+}
+
+void GeneralConf::initCredentialHolder()
+{
+    QLineEdit* m_usernameEditor = new QLineEdit(tr("Username/Email"));
+//    box->setFlat(true);
+    m_layout->addWidget(m_usernameEditor);
 }
 
 void GeneralConf::initUploadWithoutConfirmation()

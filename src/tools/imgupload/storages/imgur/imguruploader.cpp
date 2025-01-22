@@ -34,23 +34,23 @@ void ImgurUploader::handleReply(QNetworkReply* reply)
     if (reply->error() == QNetworkReply::NoError) {
         QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
         QJsonObject json = response.object();
-        QJsonObject data = json[QStringLiteral("data")].toObject();
+        // QJsonObject data = json[QStringLiteral("data")].toObject();
         setImageURL(data[QStringLiteral("link")].toString());
 
-        auto deleteToken = data[QStringLiteral("deletehash")].toString();
+        // auto deleteToken = data[QStringLiteral("deletehash")].toString();
 
         // save history
-        m_currentImageName = imageURL().toString();
-        int lastSlash = m_currentImageName.lastIndexOf("/");
-        if (lastSlash >= 0) {
-            m_currentImageName = m_currentImageName.mid(lastSlash + 1);
-        }
+        // m_currentImageName = imageURL().toString();
+        // int lastSlash = m_currentImageName.lastIndexOf("/");
+        // if (lastSlash >= 0) {
+        //     m_currentImageName = m_currentImageName.mid(lastSlash + 1);
+        // }
 
         // save image to history
-        History history;
-        m_currentImageName =
-          history.packFileName("imgur", deleteToken, m_currentImageName);
-        history.save(pixmap(), m_currentImageName);
+        // History history;
+        // m_currentImageName =
+        //   history.packFileName("imgur", deleteToken, m_currentImageName);
+        // history.save(pixmap(), m_currentImageName);
 
         emit uploadOk(imageURL());
     } else {
@@ -66,19 +66,23 @@ void ImgurUploader::upload()
     pixmap().save(&buffer, "PNG");
 
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem(QStringLiteral("title"), QStringLiteral(""));
+    // urlQuery.addQueryItem(QStringLiteral("title"), QStringLiteral(""));
     QString description = FileNameHandler().parsedPattern();
-    urlQuery.addQueryItem(QStringLiteral("description"), description);
+    urlQuery.addQueryItem(QStringLiteral("filename"), QStringLiteral("%1.png").arg(description).toUtf8());
+    // urlQuery.addQueryItem(QStringLiteral("description"), description);
 
-    QUrl url(QStringLiteral("https://api.imgur.com/3/image"));
+    // QUrl url(QStringLiteral("https://api.imgur.com/3/image"));
+    QUrl url(QStringLiteral("https://api.droplr.com/files"));
     url.setQuery(urlQuery);
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader,
-                      "application/application/x-www-form-urlencoded");
+                      "image/png");
+    QString authCredentials = QStringLiteral("%1").arg("username:password").toUtf8().toBase64();
     request.setRawHeader("Authorization",
-                         QStringLiteral("Client-ID %1")
-                           .arg(ConfigHandler().uploadClientSecret())
-                           .toUtf8());
+                        //  QStringLiteral("Client-ID %1")
+                        //    .arg(ConfigHandler().uploadClientSecret())
+                        //    .toUtf8());
+                        QStringLiteral("Basic %1").arg(authCredentials).toUtf8());
 
     m_NetworkAM->post(request, byteArray);
 }
